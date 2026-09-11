@@ -23,5 +23,64 @@ function pool(){const budget=Number($('budget').value);return dishes.filter(d=>(
 function render(d,label){current=d;$('dish').textContent=d.name;$('description').textContent=d.desc;$('price').innerHTML=`${d.min}–${d.max}k <small>/ phần</small>`;$('category').textContent=labels[d.type];$('result-label').textContent=label;$('confirmed').hidden=true;$('confirm').textContent='Chốt món này ✓';}
 function update(){const list=pool();$('confirm').hidden=!list.length;if(!list.length){$('dish').textContent='Chưa có món phù hợp';$('description').textContent='Tăng ngân sách một chút hoặc thử nhóm món khác nhé.';$('price').textContent='—';$('category').textContent='Thử đổi bộ lọc';$('result-label').textContent='ĐỔI GU MỘT CHÚT?';$('confirmed').hidden=true;current=null;}$('count').textContent=`Có ${list.length} món hợp ý mày`;$('shuffle').disabled=busy||!list.length;if(!list.includes(current)&&list.length)render(list[0],'HỢP VỚI LỰA CHỌN CỦA MÀY');}
 $('budget').addEventListener('change',update);$('types').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;type=b.dataset.value;document.querySelectorAll('#types button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));update();});
-$('shuffle').addEventListener('click',()=>{if(busy)return;const list=pool();if(!list.length)return;busy=true;$('shuffle').disabled=true;$('shuffle').innerHTML='Đang chọn món… <span>✳</span>';setTimeout(()=>{const choices=list.filter(d=>d!==current);const available=choices.length?choices:list;render(available[Math.floor(Math.random()*available.length)],'HÔM NAY, ĂN MÓN NÀY!');busy=false;$('shuffle').innerHTML='Chọn lại món khác <span>↻</span>';update();},window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:380);});
+const resultCard=document.querySelector('.result');
+const resultBody=document.querySelector('.result-body');
+const filterButtons=[...document.querySelectorAll('#types button')];
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+$('shuffle').addEventListener('click',()=>{
+  if(busy)return;
+  const list=pool();
+  if(!list.length)return;
+  const choices=list.filter(d=>d!==current);
+  const available=choices.length?choices:list;
+  const selected=available[Math.floor(Math.random()*available.length)];
+  busy=true;
+  $('shuffle').disabled=true;
+  $('budget').disabled=true;
+  filterButtons.forEach(b=>b.disabled=true);
+  $('confirm').disabled=true;
+  $('confirmed').hidden=true;
+  resultBody.setAttribute('aria-busy','true');
+  resultCard.classList.remove('revealed');
+  resultCard.classList.add('spinning');
+  $('shuffle').classList.add('spinning');
+  $('shuffle').setAttribute('aria-label','Đang quay chọn món');
+  $('shuffle').innerHTML='<span class="reel-name" aria-hidden="true">Đang quay món…</span><span class="spin-icon" aria-hidden="true">✳</span>';
+  $('result-label').textContent='ĐANG QUAY… ĐỢI CHÚT NHA!';
+  const finish=()=>{
+    resultCard.classList.remove('spinning');
+    $('shuffle').classList.remove('spinning');
+    render(selected,'CHỐT KÈO! HÔM NAY ĂN MÓN NÀY!');
+    resultBody.setAttribute('aria-busy','false');
+    busy=false;
+    $('budget').disabled=false;
+    filterButtons.forEach(b=>b.disabled=false);
+    $('confirm').disabled=false;
+    $('shuffle').removeAttribute('aria-label');
+    $('shuffle').innerHTML='Quay lại món khác <span>↻</span>';
+    update();
+    resultCard.classList.add('revealed');
+    if(window.matchMedia('(max-width: 620px)').matches){
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        resultBody.scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth',block:'start'});
+      }));
+    }
+  };
+  if(reducedMotion.matches){finish();return;}
+  let tick=0;
+  let last=current;
+  const roll=()=>{
+    const nextChoices=list.filter(d=>d!==last);
+    const candidates=nextChoices.length?nextChoices:list;
+    const preview=candidates[Math.floor(Math.random()*candidates.length)];
+    last=preview;
+    $('dish').textContent=preview.name;
+    $('shuffle').querySelector('.reel-name').textContent=preview.name;
+    $('dish').animate([{transform:'translateY(-12px)',opacity:.25},{transform:'translateY(0)',opacity:1}],{duration:120,easing:'ease-out'});
+    tick++;
+    if(tick<15){setTimeout(roll,55+Math.pow(tick/15,3)*260);}
+    else{setTimeout(finish,340);}
+  };
+  roll();
+});
 $('confirm').addEventListener('click',()=>{$('confirmed').textContent=`Chốt ${current.name.toLowerCase()} nhé. Đi ăn thôi, ngon miệng!`;$('confirmed').hidden=false;$('confirm').textContent='Đã chốt ✓';});update();
