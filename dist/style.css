@@ -15,3 +15,15 @@
 @keyframes food-spin{to{transform:rotate(360deg)}}
 @keyframes food-reveal{0%{box-shadow:0 0 0 0 #f4512d80}60%{box-shadow:0 0 0 10px #f4512d00}100%{box-shadow:0 0 0 0 #f4512d00}}
 @media(prefers-reduced-motion:reduce){.spin-icon,.result.revealed,.result.spinning .photo-sticker{animation:none}}
+
+.photo img{transition:opacity .35s ease,transform .65s ease;transform:scale(1)}
+.photo.loading-photo img{opacity:0;transform:scale(1.045)}
+.photo.loading-photo{background:#343929}
+.photo.loading-photo .photo-sticker{opacity:0}
+.photo-label{max-width:calc(100% - 130px);line-height:1.5}
+.photo-credit{max-width:calc(100% - 36px);line-height:1.4}
+
+.photo{height:auto;aspect-ratio:4/3}
+.food-art{position:absolute;inset:50% 0 auto;width:100%;aspect-ratio:1;transform:translateY(-50%);background-size:300% 200%;background-repeat:no-repeat;transition:opacity .35s ease;}
+.photo.loading-photo .food-art{opacity:0}
+.photo-credit{font-size:11px;text-shadow:0 1px 4px #000}

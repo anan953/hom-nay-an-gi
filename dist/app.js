@@ -19,9 +19,41 @@ const dishes=[
 {name:'Bún chả',min:40,max:60,type:'dry',desc:'Chả nướng thơm lừng, bún và rau sống. Chấm từng miếng cho bữa ăn thật thong thả.'}
 ];
 const $=id=>document.getElementById(id);const labels={dry:'Món khô',rice:'Cơm',soup:'Món nước',veg:'Ăn chay'};let type='all',current=dishes[0],busy=false;
+const photo=document.querySelector('.photo');
+const foodImage=photo.querySelector('.food-art');
+const photoCredit=photo.querySelector('.photo-credit');
+const photoLabel=photo.querySelector('.photo-label');
+let photoRequest=0;
+function showPhoto(d){
+  const asset=mealPhotos[d.name];
+  const request=++photoRequest;
+  photo.classList.add('loading-photo');
+  foodImage.setAttribute('aria-label','Ảnh minh họa AI: '+d.name);
+  photoLabel.textContent='ĐANG LÊN MÓN…';
+  photoCredit.hidden=true;
+  if(!asset){photoLabel.textContent='ẢNH MÓN ĂN ĐANG CẬP NHẬT';return;}
+  const next=new Image();
+  next.onload=()=>{
+    if(request!==photoRequest)return;
+    foodImage.style.backgroundImage=`url("${asset.url}")`;
+    foodImage.style.backgroundPosition=`${asset.x}% ${asset.y}%`;
+    photoLabel.textContent=d.name.toUpperCase();
+    photoCredit.textContent='Ảnh minh họa AI';
+    photoCredit.hidden=false;
+    photo.classList.remove('loading-photo');
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      foodImage.animate([{opacity:0},{opacity:1}],{duration:350,easing:'ease-out'});
+    }
+  };
+  next.onerror=()=>{
+    if(request!==photoRequest)return;
+    photoLabel.textContent='CHƯA TẢI ĐƯỢC ẢNH MÓN NÀY';
+  };
+  next.src=asset.url;
+}
 function pool(){const budget=Number($('budget').value);return dishes.filter(d=>(type==='all'||d.type===type)&&(!budget||d.max<=budget));}
-function render(d,label){current=d;$('dish').textContent=d.name;$('description').textContent=d.desc;$('price').innerHTML=`${d.min}–${d.max}k <small>/ phần</small>`;$('category').textContent=labels[d.type];$('result-label').textContent=label;$('confirmed').hidden=true;$('confirm').textContent='Chốt món này ✓';}
-function update(){const list=pool();$('confirm').hidden=!list.length;if(!list.length){$('dish').textContent='Chưa có món phù hợp';$('description').textContent='Tăng ngân sách một chút hoặc thử nhóm món khác nhé.';$('price').textContent='—';$('category').textContent='Thử đổi bộ lọc';$('result-label').textContent='ĐỔI GU MỘT CHÚT?';$('confirmed').hidden=true;current=null;}$('count').textContent=`Có ${list.length} món hợp ý mày`;$('shuffle').disabled=busy||!list.length;if(!list.includes(current)&&list.length)render(list[0],'HỢP VỚI LỰA CHỌN CỦA MÀY');}
+function render(d,label){current=d;showPhoto(d);$('dish').textContent=d.name;$('description').textContent=d.desc;$('price').innerHTML=`${d.min}–${d.max}k <small>/ phần</small>`;$('category').textContent=labels[d.type];$('result-label').textContent=label;$('confirmed').hidden=true;$('confirm').textContent='Chốt món này ✓';}
+function update(){const list=pool();$('confirm').hidden=!list.length;if(!list.length){$('dish').textContent='Chưa có món phù hợp';$('description').textContent='Tăng ngân sách một chút hoặc thử nhóm món khác nhé.';$('price').textContent='—';$('category').textContent='Thử đổi bộ lọc';$('result-label').textContent='ĐỔI GU MỘT CHÚT?';$('confirmed').hidden=true;current=null;photoRequest++;photo.classList.add('loading-photo');photoLabel.textContent='CHỌN LẠI KHẨU VỊ NHÉ';photoCredit.hidden=true;}$('count').textContent=`Có ${list.length} món hợp ý mày`;$('shuffle').disabled=busy||!list.length;if(!list.includes(current)&&list.length)render(list[0],'HỢP VỚI LỰA CHỌN CỦA MÀY');}
 $('budget').addEventListener('change',update);$('types').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;type=b.dataset.value;document.querySelectorAll('#types button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));update();});
 const resultCard=document.querySelector('.result');
 const resultBody=document.querySelector('.result-body');
@@ -34,6 +66,7 @@ $('shuffle').addEventListener('click',()=>{
   const choices=list.filter(d=>d!==current);
   const available=choices.length?choices:list;
   const selected=available[Math.floor(Math.random()*available.length)];
+  if(mealPhotos[selected.name]){const preload=new Image();preload.src=mealPhotos[selected.name].url;}
   busy=true;
   $('shuffle').disabled=true;
   $('budget').disabled=true;
@@ -83,4 +116,4 @@ $('shuffle').addEventListener('click',()=>{
   };
   roll();
 });
-$('confirm').addEventListener('click',()=>{$('confirmed').textContent=`Chốt ${current.name.toLowerCase()} nhé. Đi ăn thôi, ngon miệng!`;$('confirmed').hidden=false;$('confirm').textContent='Đã chốt ✓';});update();
+$('confirm').addEventListener('click',()=>{$('confirmed').textContent=`Chốt ${current.name.toLowerCase()} nhé. Đi ăn thôi, ngon miệng!`;$('confirmed').hidden=false;$('confirm').textContent='Đã chốt ✓';});update();showPhoto(current);
