@@ -88,5 +88,65 @@ const mealPhotos={
     "url": "assets/meals-c.png",
     "x": 100,
     "y": 100
+  },
+  "Phở gà": {
+    "url": "assets/meals-d.png",
+    "x": 0,
+    "y": 0
+  },
+  "Bánh canh chả cá": {
+    "url": "assets/meals-d.png",
+    "x": 50,
+    "y": 0
+  },
+  "Cháo gà": {
+    "url": "assets/meals-d.png",
+    "x": 100,
+    "y": 0
+  },
+  "Cơm bò lúc lắc": {
+    "url": "assets/meals-d.png",
+    "x": 0,
+    "y": 100
+  },
+  "Cơm sườn rim": {
+    "url": "assets/meals-d.png",
+    "x": 50,
+    "y": 100
+  },
+  "Bún cá": {
+    "url": "assets/meals-d.png",
+    "x": 100,
+    "y": 100
+  },
+  "Bánh xèo": {
+    "url": "assets/meals-e.png",
+    "x": 0,
+    "y": 0
+  },
+  "Bánh mì ốp la": {
+    "url": "assets/meals-e.png",
+    "x": 50,
+    "y": 0
+  },
+  "Gỏi cuốn tôm thịt": {
+    "url": "assets/meals-e.png",
+    "x": 100,
+    "y": 0
+  },
+  "Bún đậu mắm tôm": {
+    "url": "assets/meals-e.png",
+    "x": 0,
+    "y": 100
+  },
+  "Miến xào chay": {
+    "url": "assets/meals-e.png",
+    "x": 50,
+    "y": 100
+  },
+  "Bánh mì nấm chay": {
+    "url": "assets/meals-e.png",
+    "x": 100,
+    "y": 100
   }
 };
