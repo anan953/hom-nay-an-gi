@@ -16,7 +16,19 @@ const dishes=[
 {name:'Phở nấm chay',min:35,max:50,type:'veg',desc:'Nấm thơm, bánh phở mềm và nước dùng rau củ. Ấm bụng theo cách thật nhẹ nhàng.'},
 {name:'Cơm rau củ chay',min:25,max:35,type:'veg',desc:'Cơm nóng với rau củ theo mùa và đậu hũ. Mộc mạc, vừa túi, dễ ăn.'},
 {name:'Cơm rang trứng',min:25,max:35,type:'rice',desc:'Cơm rang tơi, trứng thơm và chút rau củ. Cứ đơn giản vậy mà ngon.'},
-{name:'Bún chả',min:40,max:60,type:'dry',desc:'Chả nướng thơm lừng, bún và rau sống. Chấm từng miếng cho bữa ăn thật thong thả.'}
+{name:'Bún chả',min:40,max:60,type:'dry',desc:'Chả nướng thơm lừng, bún và rau sống. Chấm từng miếng cho bữa ăn thật thong thả.'},
+{"name": "Phở gà", "min": 35, "max": 50, "type": "soup", "desc": "Nước dùng thanh, thịt gà mềm và lá chanh thơm. Một tô nóng dễ ăn bất kể sáng hay tối."},
+{"name": "Bánh canh chả cá", "min": 25, "max": 35, "type": "soup", "desc": "Sợi bánh canh mềm dai, chả cá vàng thơm và nước dùng nóng. Vừa túi mà vẫn no bụng."},
+{"name": "Cháo gà", "min": 25, "max": 35, "type": "soup", "desc": "Cháo sánh mềm, gà xé và hành lá. Hôm nào thèm một món ấm bụng thì chốt tô này."},
+{"name": "Cơm bò lúc lắc", "min": 50, "max": 75, "type": "rice", "desc": "Bò áp chảo với hành tây, ớt chuông và cơm nóng. Một đĩa đầy màu sắc cho bữa ăn thật đã."},
+{"name": "Cơm sườn rim", "min": 35, "max": 50, "type": "rice", "desc": "Sườn rim bóng thơm, mặn ngọt vừa miệng, ăn cùng cơm trắng. Đậm đà kiểu cơm nhà."},
+{"name": "Bún cá", "min": 30, "max": 45, "type": "soup", "desc": "Cá chiên vàng, bún mềm và nước dùng cà chua thơm thì là. Thêm chút chanh cho tròn vị."},
+{"name": "Bánh xèo", "min": 35, "max": 55, "type": "dry", "desc": "Vỏ bánh giòn, nhân tôm và giá, cuốn rau rồi chấm nước mắm. Ăn chậm một chút cho đã miệng."},
+{"name": "Bánh mì ốp la", "min": 20, "max": 30, "type": "dry", "desc": "Bánh mì giòn chấm trứng ốp la, thêm cà chua và dưa leo. Đơn giản mà rất biết chiều cơn đói."},
+{"name": "Gỏi cuốn tôm thịt", "min": 30, "max": 45, "type": "dry", "desc": "Tôm, thịt, bún và rau gói trong bánh tráng mềm. Giá tham khảo cho một phần nhiều cuốn."},
+{"name": "Bún đậu mắm tôm", "min": 40, "max": 60, "type": "dry", "desc": "Bún lá, đậu chiên vàng, thịt luộc và rau thơm. Pha mắm tôm theo gu rồi ăn thôi."},
+{"name": "Miến xào chay", "min": 30, "max": 40, "type": "veg", "desc": "Miến dai nhẹ xào nấm, đậu hũ và rau củ. Chọn nước tương và gia vị chay khi gọi món nhé."},
+{"name": "Bánh mì nấm chay", "min": 20, "max": 30, "type": "veg", "desc": "Nấm xào thơm, đậu hũ, đồ chua và rau trong ổ bánh giòn. Một lựa chọn chay gọn nhẹ, vừa túi."}
 ];
 const $=id=>document.getElementById(id);const labels={dry:'Món khô',rice:'Cơm',soup:'Món nước',veg:'Ăn chay'};let type='all',current=dishes[0],busy=false;
 const photo=document.querySelector('.photo');
