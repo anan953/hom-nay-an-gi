@@ -10,6 +10,7 @@ Web chọn món ăn ngẫu nhiên bằng tiếng Việt, giúp chốt món nhanh
 - Ảnh minh họa AI riêng cho từng món, có hiệu ứng đổi ảnh.
 - Tự cuộn tới kết quả trên màn hình điện thoại.
 - Hỗ trợ tùy chọn giảm chuyển động của thiết bị.
+- Tìm quán theo món qua GrabFood, Google Maps; mở ShopeeFood và sao chép tên món. Liên kết ứng dụng phụ thuộc thiết bị; dịch vụ có thể yêu cầu địa chỉ hoặc đăng nhập.
 
 ## Chạy trên máy
 
