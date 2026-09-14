@@ -33,4 +33,4 @@ Mở `http://localhost:4173` trong trình duyệt. Có thể dùng bất kỳ m�
 
 ## Lưu ý
 
-Giá chỉ mang tính tham khảo, thay đổi theo quán và khu vực. Ảnh là minh họa AI, không phải ảnh của một nhà hàng cụ thể. Ứng dụng chạy ở trình duyệt, không yêu cầu tài khoản và không gửi lựa chọn món ăn lên máy chủ. Font chữ được tải từ Google Fonts, với font hệ thống dự phòng.
+Giá chỉ mang tính tham khảo, thay đổi theo quán và khu vực. Ảnh là minh họa AI, không phải ảnh của một nhà hàng cụ thể. Ứng dụng chạy ở trình duyệt, không yêu cầu tài khoản và không lưu lựa chọn món ăn trên máy chủ riêng. Khi bấm liên kết tìm quán, tên món được gửi tới dịch vụ mà bạn chọn. Font chữ được tải từ Google Fonts, với font hệ thống dự phòng.

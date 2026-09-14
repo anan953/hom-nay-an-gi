@@ -40,4 +40,4 @@
 #copy-dish{background:transparent;border:1px solid #8c905b;color:#33371c;border-radius:7px;padding:9px;font-size:12px;flex-shrink:0}
 .link-help,.copy-status{font-size:12px;line-height:1.65;color:#575b36;margin:12px 0 0}
 .copy-status:empty{display:none}
-@media(max-width:390px){.food-links{grid-template-columns:1fr}.food-link{font-size:14px}.copy-row{flex-wrap:wrap}}
+@media(max-width:480px){.food-links{grid-template-columns:1fr}.food-link{font-size:14px}.copy-row{flex-wrap:wrap}}
