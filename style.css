@@ -27,3 +27,17 @@
 .food-art{position:absolute;inset:50% 0 auto;width:100%;aspect-ratio:1;transform:translateY(-50%);background-size:300% 200%;background-repeat:no-repeat;transition:opacity .35s ease;}
 .photo.loading-photo .food-art{opacity:0}
 .photo-credit{font-size:11px;text-shadow:0 1px 4px #000}
+
+.find-food{border-top:1px solid #cacc96;margin-top:24px;padding-top:20px}
+.find-food[hidden]{display:none}
+.find-food h3{font-size:17px;letter-spacing:-.4px;margin:0 0 14px}
+.food-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.food-link{display:flex;align-items:center;justify-content:space-between;gap:5px;text-decoration:none;padding:13px 10px;border-radius:10px;font-size:13px;font-weight:700;min-height:46px}
+.food-link:hover{filter:brightness(.92)}
+.shopee{background:#c83b18;color:white}.grab{background:#08783c;color:white}.maps{background:#fff;color:#234b9b;border:1px solid #c1c8af}
+.copy-row{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:16px;font-size:13px}
+#search-dish{user-select:all;font-weight:600;overflow-wrap:anywhere}
+#copy-dish{background:transparent;border:1px solid #8c905b;color:#33371c;border-radius:7px;padding:9px;font-size:12px;flex-shrink:0}
+.link-help,.copy-status{font-size:12px;line-height:1.65;color:#575b36;margin:12px 0 0}
+.copy-status:empty{display:none}
+@media(max-width:480px){.food-links{grid-template-columns:1fr}.food-link{font-size:14px}.copy-row{flex-wrap:wrap}}
